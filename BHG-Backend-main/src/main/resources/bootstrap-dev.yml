@@ -1,6 +1,6 @@
 spring:
   application:
-    name: bhg-admin
+    name: ic-admin
   # cloud:
   #   nacos:
   #     discovery:
@@ -14,10 +14,10 @@ spring:
   #       group: DEFAULT_GROUP
   #       enabled: true
   #       extension-configs:
-  #         - data-id: bhg-stage2-test-static-dev.yaml
+  #         - data-id: ic-stage2-test-static-dev.yaml
   #           group: DEFAULT_GROUP
   #           refresh: false
-  #         - data-id: new-bhg-admin-dynamic-prod.yaml
+  #         - data-id: new-ic-admin-dynamic-prod.yaml
   #           group: DEFAULT_GROUP
   #           refresh: true
   datasource:
@@ -69,7 +69,7 @@ static-properties:
     endpoint: oss-ap-southeast-1.aliyuncs.com
     accessKeyId: LTAI5tCmx8qnwPVX4vtmcgHY
     accessKeySecret: EwHMhb8xFj8J4NmK9AFkwgA2qn3K9Y
-    bucketName: bhg-stage2
+    bucketName: ic-stage2
   trulioo_username: Beaver_Consulting_Trial_DocV_API
   trulioo_password: Welcome2022!
 
@@ -88,33 +88,33 @@ dynamic-properties:
   # reset password token/code过期时间 1000*60*15
   resetPasswordTokenExpireTime: 900000
   # kyc回调接口
-  kycCallBackUrl: https://bhgadmin.bhgglobal.com.au/api/v1/account/kyc-callBack
+  kycCallBackUrl: https://icadmin.icglobal.com.au/api/v1/account/kyc-callBack
   # send unit certificate 邮件抄送和加密抄送人
   sendUCEmailReceivers:
     cc:
       - name: operations Mailbox
-        email: operations@bhgglobal.com.au
+        email: operations@icglobal.com.au
     bcc:
       - name: Andy Chen
-        email: andy.chen@bhgglobal.com.au
+        email: andy.chen@icglobal.com.au
       - name: Emily Zhang
-        email: emily.zhang@bhgglobal.com.au
+        email: emily.zhang@icglobal.com.au
   sendPFMonthlyEmailReceivers:
     cc:
       - name: operations
-        email: operations@bhgglobal.com.au
+        email: operations@icglobal.com.au
   sendPFAnnualEmailReceivers:
     cc:
       - name: operations
-        email: operations@bhgglobal.com.au
+        email: operations@icglobal.com.au
   sendEnquiryEmailReceivers:
     cc:
       - name: loan
-        email: loan@bhgglobal.com.au
+        email: loan@icglobal.com.au
   sendInvestmentEmailReceivers:
     cc:
       - name: operations
-        email: operations@bhgglobal.com.au
+        email: operations@icglobal.com.au
   passwordresetemail:
     subject: "Reset Beaver admin password"
     textPart: ""
@@ -136,7 +136,7 @@ dynamic-properties:
 # # 应用名称
 # spring:
 #   application:
-#     name: bhg-admin
+#     name: ic-admin
 #   cloud:
 #     nacos:
 #       discovery:
@@ -158,12 +158,12 @@ dynamic-properties:
 #         enabled: true
 #         #静态配置文件
 #         extension-configs[0]:
-#           data-id: bhg-stage2-test-static-dev.yaml
+#           data-id: ic-stage2-test-static-dev.yaml
 #           group: DEFAULT_GROUP
 #           refresh: false
 #         #动态配置文件
 #         extension-configs[1]:
-#           data-id: new-bhg-admin-dynamic-prod.yaml
+#           data-id: new-ic-admin-dynamic-prod.yaml
 #           group: DEFAULT_GROUP
 #           refresh: true
 #   # 设置-1，不限制导入文件的大小
@@ -237,4 +237,4 @@ dynamic-properties:
 # #   supportMethodsArguments: true
 
 # #template:
-# #  path: D:\code\bhg-admin-backend\src\main\resources\templates\unitCertificate
+# #  path: D:\code\ic-admin-backend\src\main\resources\templates\unitCertificate

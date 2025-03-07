@@ -114,9 +114,9 @@ const handleShowFile = (item) => {
         </div>
         <div class="block padding-t-20 padding-b-20" v-if="AuditInfo.auditType !== 'Re-Investment Request'">
             <el-descriptions :title="AuditInfo.auditType" :column="1" border>
-                <el-descriptions-item label="BHG ID" label-align="center" align="center"
+                <el-descriptions-item label="ic ID" label-align="center" align="center"
                     v-if="AuditInfo.auditType === 'Entity Update'">
-                    {{ AuditInfo?.newEntity?.bhgId }}
+                    {{ AuditInfo?.newEntity?.icId }}
                 </el-descriptions-item>
                 <el-descriptions-item :label="item.name" label-align="center" align="center"
                     v-for="(item, index) in AuditInfo.entityContentShow" :key="index">

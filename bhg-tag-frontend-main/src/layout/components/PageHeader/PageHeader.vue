@@ -81,7 +81,7 @@ const handleToPath = () => {
         <div>
             <el-breadcrumb :separator-icon="ArrowRight">
                 <el-breadcrumb-item :to="{ path: '/' }">
-                    <div class="first-home">{{ VITE_WEB_ENV === 'bhg' ? 'Infinity Capital' : 'BCUC' }}</div>
+                    <div class="first-home">{{ VITE_WEB_ENV === 'ic' ? 'Infinity Capital' : 'BCUC' }}</div>
                 </el-breadcrumb-item>
                 <el-breadcrumb-item @click="handleToPath">
                     <div class="sub-home">{{ router?.currentRoute.value.name }}</div>

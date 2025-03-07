@@ -50,7 +50,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
       preprocessorOptions: {
         scss: {
           additionalData:
-            VITE_WEB_ENV === 'bhg' ? `@import "@/style/bhg.scss";` : `@import "@/style/bcuc.scss";`
+            VITE_WEB_ENV === 'ic' ? `@import "@/style/ic.scss";` : `@import "@/style/bcuc.scss";`
         }
       }
     },
@@ -75,7 +75,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
       /** 接口代理 */
       // proxy: {
       //   '/beaver-admin': {
-      //     target: 'https://bk.admin.bhgglobal.com.au',
+      //     target: 'https://bk.admin.icglobal.com.au',
       //     // ws: true,
       //     /** 是否允许跨域 */
       //     changeOrigin: true,

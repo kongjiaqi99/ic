@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.bhg.bhgadmin.mapper.EventsMapper">
-  <resultMap id="BaseResultMap" type="com.bhg.bhgadmin.entity.EventsEntity">
+<mapper namespace="com.ic.icadmin.mapper.EventsMapper">
+  <resultMap id="BaseResultMap" type="com.ic.icadmin.entity.EventsEntity">
     <!--@mbg.generated-->
     <!--@Table events-->
     <id column="id" jdbcType="BIGINT" property="id" />
@@ -22,7 +22,7 @@
     id, title, start_time, city, "location", brief_introduction, "language", main_img, 
     trans_id, created_at, updated_at, del_flag
   </sql>
-  <select id="queryEventTrans" resultType="com.bhg.bhgadmin.dto.response.events.EventTransResponse">
+  <select id="queryEventTrans" resultType="com.ic.icadmin.dto.response.events.EventTransResponse">
     select id as id, title as title from events
     where del_flag = false
     order by id desc

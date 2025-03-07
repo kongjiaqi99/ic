@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.bhg.bhgadmin.mapper.FinancingsMapper">
-  <resultMap id="BaseResultMap" type="com.bhg.bhgadmin.entity.FinancingsEntity">
+<mapper namespace="com.ic.icadmin.mapper.FinancingsMapper">
+  <resultMap id="BaseResultMap" type="com.ic.icadmin.entity.FinancingsEntity">
     <!--@mbg.generated-->
     <!--@Table financings-->
     <id column="id" jdbcType="BIGINT" property="id" />
@@ -29,7 +29,7 @@
   </sql>
 
   <select id="queryFinancingsResponses"
-          resultType="com.bhg.bhgadmin.dto.response.financings.FinancingsResponse">
+          resultType="com.ic.icadmin.dto.response.financings.FinancingsResponse">
     select fi.id as id, fi.client_id as clientId, c.name as clientName, fi.fund_id as fundId, f.name as fundName,
       fi.commission_rate as commissionRate, fi.commission_amount as commissionAmount,
       fi.target_amount as targetAmount,
@@ -63,7 +63,7 @@
   </select>
 
   <select id="queryFinancingById"
-          resultType="com.bhg.bhgadmin.dto.response.financings.FinancingDetailResponse">
+          resultType="com.ic.icadmin.dto.response.financings.FinancingDetailResponse">
     select fi.id as id, fi.client_id as clientId, c.name as clientName, fi.fund_id as fundId, f.name as fundName,
            fi.commission_rate as commissionRate, fi.commission_amount as commissionAmount,
            fi.target_amount as targetAmount,
@@ -79,7 +79,7 @@
   </select>
 
   <select id="queryFinancingByIdWhenEdit"
-          resultType="com.bhg.bhgadmin.dto.response.financings.FinancingEditDetailResponse">
+          resultType="com.ic.icadmin.dto.response.financings.FinancingEditDetailResponse">
     select fi.id as id, fi.client_id as clientId, c.name as clientName, fi.fund_id as fundId, f.name as fundName,
            fi.commission_rate as commissionRate, fi.commission_amount as commissionAmount,
            fi.target_amount as targetAmount, fi.financing_amount as financingAmount,

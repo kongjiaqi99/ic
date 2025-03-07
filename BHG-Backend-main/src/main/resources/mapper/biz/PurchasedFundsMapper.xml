@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.bhg.bhgadmin.mapper.PurchasedFundsMapper">
-  <resultMap id="BaseResultMap" type="com.bhg.bhgadmin.entity.PurchasedFundsEntity">
+<mapper namespace="com.ic.icadmin.mapper.PurchasedFundsMapper">
+  <resultMap id="BaseResultMap" type="com.ic.icadmin.entity.PurchasedFundsEntity">
     <!--@mbg.generated-->
     <!--@Table purchased_funds-->
     <id column="id" jdbcType="BIGINT" property="id" />
@@ -39,8 +39,8 @@
       application_form_signed_three,
       application_form_signed_four
   </sql>
-    <resultMap id="BizPurchasedFundsDTOMap" type="com.bhg.bhgadmin.dto.biz.BizPurchasedFundsDTO">
-        <result column="emailList" jdbcType="VARCHAR" property="emailList" typeHandler="com.bhg.bhgadmin.config.handler.StringListHandler"/>
+    <resultMap id="BizPurchasedFundsDTOMap" type="com.ic.icadmin.dto.biz.BizPurchasedFundsDTO">
+        <result column="emailList" jdbcType="VARCHAR" property="emailList" typeHandler="com.ic.icadmin.config.handler.StringListHandler"/>
     </resultMap>
   <select id="queryPurchasedFunds" resultMap="BizPurchasedFundsDTOMap">
     select pf.id, pf.client_id, c.name as clientName, c.email as clientEmail, pf.fund_id, f.name as fundName, f.b_fund_category as bFundCategory,
@@ -52,7 +52,7 @@
       pf.application_form_signed,pf.application_form_signed_two,
       pf.application_form_signed_three,
       pf.application_form_signed_four, pf.transaction_date,ie.entity_name as entityName, ie.email_list as emailList,
-      ie.bhg_id as bhgId,
+      ie.ic_id as icId,
       f.default_start_date as defaultStartDate,
       f.b_delayed_growth_rate as bDelayedGrowthRate,
       f.created_at as fundCreateAt, f.extend_start_date as extendStartDate,
@@ -89,8 +89,8 @@
     <if test="(request.entityName != null and request.entityName != '') ">
       ie.entity_name ilike '%'||#{request.entityName}||'%' and
     </if>
-    <if test="(request.bhgId != null and request.bhgId != '')">
-      ie.bhg_id ilike '%'||#{request.bhgId}||'%' and
+    <if test="(request.icId != null and request.icId != '')">
+      ie.ic_id ilike '%'||#{request.icId}||'%' and
     </if>
     <if test="request.clientName != null and request.clientName != ''">
       c.name ilike '%'||#{request.clientName}||'%' and
@@ -102,7 +102,7 @@
   </select>
 
   <select id="queryPurchasedFundById" parameterType="java.lang.Long"
-          resultType="com.bhg.bhgadmin.dto.biz.BizPurchasedFundsDTO">
+          resultType="com.ic.icadmin.dto.biz.BizPurchasedFundsDTO">
       select pf.id,
              pf.client_id,
              c.name                     as clientName,
@@ -149,7 +149,7 @@
   </select>
 
     <select id="queryPurchasedFundsForFinancings" parameterType="java.lang.Long"
-            resultType="com.bhg.bhgadmin.dto.biz.BizPurchasedFundsDTO">
+            resultType="com.ic.icadmin.dto.biz.BizPurchasedFundsDTO">
         select pf.id, pf.client_id, c.name as clientName, pf.fund_id, f.name as fundName, f.b_fund_category as bFundCategory,
         f.b_project_duration_month as bProjectDurationMonth, pf.unit_certificate_date, pf.purchase_amount, pf.current_return,
         pf.dividend_amount, pf.dividend_cycle, pf.created_at, pf.updated_at, pf.unit_certi, pf.entity_name,
@@ -187,7 +187,7 @@
     </select>
 
     <select id="queryPurchasedFundsForClientAPI" parameterType="java.lang.Long"
-            resultType="com.bhg.bhgadmin.dto.biz.BizPurchasedFundsDTO">
+            resultType="com.ic.icadmin.dto.biz.BizPurchasedFundsDTO">
         select pf.id, pf.client_id, pf.fund_id, f.name as fundName, f.b_fund_category as bFundCategory,
         f.b_project_duration_month as bProjectDurationMonth, pf.unit_certificate_date, pf.purchase_amount, pf.current_return,
         pf.dividend_amount, pf.dividend_cycle, pf.created_at, pf.updated_at, pf.unit_certi, pf.entity_name,
@@ -208,13 +208,13 @@
         pf.del_flag = false and f.del_flag = false
         order by pf.id
     </select>
-    <select id="selectInvestmentList" resultType="com.bhg.bhgadmin.dto.response.investment.InvestmentResponse">
+    <select id="selectInvestmentList" resultType="com.ic.icadmin.dto.response.investment.InvestmentResponse">
         select
         pf.fund_id fundId,
         f.name fundName,
         c.name clientName,
         ie.entity_name entityName,
-        ie.bhg_id bhgId,
+        ie.ic_id icId,
         pf.client_id clientId,
         pf.investment_entity_id entityId,
 <!--        sum(pf.purchase_amount) as purchasedAmount,-->
@@ -240,8 +240,8 @@
             <if test="(entityName != null and entityName != '') ">
                 and ie.entity_name ilike '%'||#{entityName}||'%'
             </if>
-            <if test="(bhgId != null and bhgId != '')">
-                and ie.bhg_id ilike '%'||#{bhgId}||'%'
+            <if test="(icId != null and icId != '')">
+                and ie.ic_id ilike '%'||#{icId}||'%'
             </if>
             <if test="clientName != null and clientName != ''">
                 and c.name ilike '%'||#{clientName}||'%'
@@ -252,7 +252,7 @@
         </where>
         group by pf.fund_id, pf.investment_entity_id, pf.client_id, f.name ,
         c.name ,
-        ie.entity_name ,ie.bhg_id
+        ie.entity_name ,ie.ic_id
         order by max(pf.created_at) desc
     </select>
     <select id="selectInvestCount" resultType="java.lang.Integer">
@@ -275,7 +275,7 @@
         and popular > 0
         order by created_at desc limit 6;
     </select>
-    <select id="getInvestmentCount" resultType="com.bhg.bhgadmin.dto.response.client.InvestmentEntityResponse">
+    <select id="getInvestmentCount" resultType="com.ic.icadmin.dto.response.client.InvestmentEntityResponse">
         select count(distinct (fund_id)) as investmentCount,
             investment_entity_id as id
         from purchased_funds pf

@@ -12,7 +12,7 @@ import type { UploadUserFile } from 'element-plus'
 
 interface RuleForm {
     addressLine: string
-    bhgId: string
+    icId: string
     emailList: any[]
     entityName: string
     suburb: string
@@ -58,7 +58,7 @@ const applicationFormSignedFileList4 = ref<UploadUserFile[]>([])
 const ruleFormRef = ref<FormInstance>()
 const ruleForm = reactive<RuleForm>({
     addressLine: "",
-    bhgId: "",
+    icId: "",
     emailList: [],
     entityName: "",
     suburb: "",
@@ -85,8 +85,8 @@ const rules = reactive<FormRules<RuleForm>>({
     entityName: [
         { required: true, message: 'Please input Entity Name', trigger: 'blur' },
     ],
-    bhgId: [
-        { required: true, message: 'Please input BHG ID', trigger: 'blur' },
+    icId: [
+        { required: true, message: 'Please input ic ID', trigger: 'blur' },
     ],
     suburb: [
         { required: true, message: 'Please input Suburb', trigger: 'blur' },
@@ -257,7 +257,7 @@ function getEditEntity() {
         ruleForm.entityType = item?.value || ""
     }
     ruleForm.addressLine = entityInfo.value.addressLine
-    ruleForm.bhgId = entityInfo.value.bhgId
+    ruleForm.icId = entityInfo.value.icId
     ruleForm.entityName = entityInfo.value.entityName
     ruleForm.suburb = entityInfo.value.suburb
     ruleForm.state = entityInfo.value.state
@@ -325,8 +325,8 @@ const handleRemove = () => {
     </div>
     <div class="form">
         <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" label-width="200px" status-icon>
-            <el-form-item label="BHG ID" prop="bhgId">
-                <el-input v-model="ruleForm.bhgId" />
+            <el-form-item label="ic ID" prop="icId">
+                <el-input v-model="ruleForm.icId" />
             </el-form-item>
             <el-form-item label="Investor Type" prop="entityType">
                 <el-select v-model="ruleForm.entityType" placeholder="Select Investor Type">
@@ -385,7 +385,7 @@ const handleRemove = () => {
             <el-form-item label="Application form signed" prop="applicationFormList">
                 <div class="application">
                     <el-upload v-model:file-list="ruleForm.applicationFormList"
-                        action="https://portal.bhgglobal.com.au/api/v1/investment/upload" :data="jsonData" name="file"
+                        action="https://portal.icglobal.com.au/api/v1/investment/upload" :data="jsonData" name="file"
                         :auto-upload="true" list-type="text" :on-preview="handlePictureCardPreview"
                         :on-remove="handleRemove" :on-success="uploadFileSuccess">
                         <template #trigger>

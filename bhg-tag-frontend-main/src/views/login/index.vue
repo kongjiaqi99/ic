@@ -206,7 +206,7 @@ const handleToAdmin = (url: string) => {
     <div class="login-container">
         <div class="login-card">
             <div class="title">
-                <img src="@/assets/icon/login-icon.png" v-if="VITE_WEB_ENV === 'bhg'" />
+                <img src="@/assets/icon/login-icon.png" v-if="VITE_WEB_ENV === 'ic'" />
                 <img src="@/assets/icon/bug-icon.png" v-if="VITE_WEB_ENV === 'bcuc'" />
             </div>
             <div class="content">

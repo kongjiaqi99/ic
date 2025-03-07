@@ -1,4 +1,4 @@
-alter table investment_entities add column bhg_id varchar null,
+alter table investment_entities add column ic_id varchar null,
 add column email_list _varchar NULL,
 add column address_line varchar NULL,
 add column suburb varchar NULL,
@@ -75,12 +75,12 @@ insert into "dictionary" (type, code, value, sort) values
 update dictionary set del_flag =true where "type" = 'investment_entity_type' and value in ('2','3','4','5');
 
 --entity初始化
---insert into investment_entities(client_id, email_list, entity_name, bhg_id, entity_type, is_client, created_at, updated_at)
+--insert into investment_entities(client_id, email_list, entity_name, ic_id, entity_type, is_client, created_at, updated_at)
 --select id,ARRAY[email], name, beaver_id, invest_entity, true, now(),now()  from clients c where del_flag  = false;
 
 update investment_entities ie set
 email_list = array[c.email],
-bhg_id = c.beaver_id ,
+ic_id = c.beaver_id ,
 is_client = true
 from clients c
 where c.id = ie.client_id
@@ -88,7 +88,7 @@ and c.del_flag = false
 and c.id in (select client_id from
 (select client_id,count(id)  count_id from investment_entities where del_flag = false group by client_id )
 t where t.count_id =1 );
-insert into investment_entities(client_id, email_list, entity_name, bhg_id, entity_type, is_client, created_at, updated_at)
+insert into investment_entities(client_id, email_list, entity_name, ic_id, entity_type, is_client, created_at, updated_at)
 select id,ARRAY[email], name, beaver_id, invest_entity, true, now(),now()  from clients c
 where del_flag  =  false and c.id  not in (select c.id  from clients c inner join investment_entities ie on c.id = ie.client_id);
 

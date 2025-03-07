@@ -49,9 +49,9 @@ const setAct = (val) => {
 <template>
     <el-aside class="aside sidebar-container">
         <div class="logo">
-            <img class="logo-bg" src="@/assets/icon/bhg-logo.jpg" v-if="VITE_WEB_ENV === 'bhg'" style="width: 200px; height: auto;"/>
+            <img class="logo-bg" src="@/assets/icon/ic-logo.jpg" v-if="VITE_WEB_ENV === 'ic'" style="width: 200px; height: auto;"/>
             <!-- <img class="logo-bg2" src="@/assets/icon/bug-logo.png" v-if="VITE_WEB_ENV === 'bcuc'" /> -->
-            <!-- <el-image class="logo-bg" src="src/assets/icon/bhg-logo.png" /> -->
+            <!-- <el-image class="logo-bg" src="src/assets/icon/ic-logo.png" /> -->
         </div>
         <div class="menu-title">main menu</div>
         <el-scrollbar wrap-class="scrollbar-wrapper">

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.bhg.bhgadmin.mapper.NewsMapper">
-  <resultMap id="BaseResultMap" type="com.bhg.bhgadmin.entity.NewsEntity">
+<mapper namespace="com.ic.icadmin.mapper.NewsMapper">
+  <resultMap id="BaseResultMap" type="com.ic.icadmin.entity.NewsEntity">
     <!--@mbg.generated-->
     <!--@Table news-->
     <id column="id" jdbcType="BIGINT" property="id" />
@@ -21,7 +21,7 @@
     id, publish_date, title, content, main_pic, show_to_web, created_at, updated_at, 
     news_type, "language", del_flag
   </sql>
-  <select id="queryNewsNames" resultType="com.bhg.bhgadmin.dto.response.newsImgs.NewsNamesResponse">
+  <select id="queryNewsNames" resultType="com.ic.icadmin.dto.response.newsImgs.NewsNamesResponse">
     select id, title as newsTitle from news where del_flag = false order by id desc
   </select>
 </mapper>

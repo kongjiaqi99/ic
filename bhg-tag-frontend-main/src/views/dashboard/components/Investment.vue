@@ -34,7 +34,7 @@ const dateInterval = ref([
 ])
 
 const selectData = ref(0)
-const webColor = VITE_WEB_ENV === 'bhg' ? '#BE9670' : '#AD262F'
+const webColor = VITE_WEB_ENV === 'ic' ? '#BE9670' : '#AD262F'
 
 const dataList = ref([
     {

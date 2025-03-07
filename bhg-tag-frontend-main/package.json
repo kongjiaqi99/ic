@@ -1,15 +1,15 @@
 {
-  "name": "bhg-web",
+  "name": "ic-web",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "dev": "vite --mode dev",
-    "dev:prod-bhg": "vite --mode bhg-prod",
+    "dev:prod-ic": "vite --mode ic-prod",
     "dev:prod-bcuc": "vite --mode bcuc-prod",
     "build": "run-p type-check \"build:dev {@}\" --",
     "preview": "vite preview",
     "build:dev": "vite build --mode dev",
-    "build:prod-bhg": "vite build --mode bhg-prod",
+    "build:prod-ic": "vite build --mode ic-prod",
     "build:prod-bcuc": "vite build --mode bcuc-prod",
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",

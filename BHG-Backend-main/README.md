@@ -1,6 +1,6 @@
-# Backend Configuration for BHG Admin
+# Backend Configuration for ic Admin
 
-This README provides instructions to set up and configure the backend for the BHG Admin application.
+This README provides instructions to set up and configure the backend for the ic Admin application.
 
 ## Prerequisites
 
@@ -33,7 +33,7 @@ Once the required services are up and running, follow these steps to configure N
 3. Create a new configuration file in Nacos with the following content:
 
    ```yaml
-        <!-- bhg-stage2-test-static-dev.yaml -->
+        <!-- ic-stage2-test-static-dev.yaml -->
        # springboot整合postgres连接配制
         spring:
           datasource:
@@ -101,7 +101,7 @@ Once the required services are up and running, follow these steps to configure N
             endpoint: oss-ap-southeast-1.aliyuncs.com
             accessKeyId: LTAI5tCmx8qnwPVX4vtmcgHY
             accessKeySecret: EwHMhb8xFj8J4NmK9AFkwgA2qn3K9Y
-            bucketName: bhg-stage2
+            bucketName: ic-stage2
           # Kyc Truiloo账号密码
           trulioo_username: Beaver_Consulting_Trial_DocV_API
           trulioo_password: Welcome2022!
@@ -115,40 +115,40 @@ Once the required services are up and running, follow these steps to configure N
           path: /Users/xiaohu/Desktop/work/new
           
           
-        <!-- new-bhg-admin-dynamic-prod.yaml -->
+        <!-- new-ic-admin-dynamic-prod.yaml -->
         dynamic-properties: 
           # token过期时间 60*60*24000*7 毫秒millisecond
           tokenExpireTime: 604800000
           # reset password token/code过期时间 1000*60*15
           resetPasswordTokenExpireTime: 900000
           # kyc回调接口
-          kycCallBackUrl: https://bhgadmin.bhgglobal.com.au/api/v1/account/kyc-callBack
+          kycCallBackUrl: https://icadmin.icglobal.com.au/api/v1/account/kyc-callBack
           # send unit certificate 邮件抄送和加密抄送人
           sendUCEmailReceivers:
             cc:
               - name: operations Mailbox
-                email: operations@bhgglobal.com.au
+                email: operations@icglobal.com.au
             bcc:
               - name: Andy Chen
-                email: andy.chen@bhgglobal.com.au
+                email: andy.chen@icglobal.com.au
               - name: Emily Zhang
-                email: emily.zhang@bhgglobal.com.au
+                email: emily.zhang@icglobal.com.au
           sendPFMonthlyEmailReceivers:
             cc:
               - name: operations
-                email: operations@bhgglobal.com.au
+                email: operations@icglobal.com.au
           sendPFAnnualEmailReceivers:
             cc:
               - name: operations
-                email: operations@bhgglobal.com.au
+                email: operations@icglobal.com.au
           sendEnquiryEmailReceivers:
             cc:
               - name: loan
-                email: loan@bhgglobal.com.au
+                email: loan@icglobal.com.au
           sendInvestmentEmailReceivers:
             cc:
               - name: operations
-                email: operations@bhgglobal.com.au
+                email: operations@icglobal.com.au
         passwordresetemail:
           subject: "Reset Beaver admin password"
           textPart: ""
@@ -182,6 +182,6 @@ Run the following command to create the necessary tables and database structures
 ```bash
 psql -h localhost -p 5434 -U postgres -d postgres -f schema.sql
 psql -h localhost -p 5434 -U postgres -d postgres -f data.sql
-pg_restore -h localhost -p 5434 -U postgres -d postgres -v ./new_bhg_admin_production05112024.backup
+pg_restore -h localhost -p 5434 -U postgres -d postgres -v ./new_ic_admin_production05112024.backup
 ```
 

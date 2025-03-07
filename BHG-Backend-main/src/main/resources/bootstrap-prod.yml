@@ -1,7 +1,7 @@
 # 应用名称
 spring:
   application:
-    name: bhg-admin
+    name: ic-admin
   cloud:
     nacos:
       discovery:
@@ -19,11 +19,11 @@ spring:
         enabled: true
         #静态配置文件
         extension-configs[0]:
-          data-id: new-bhg-admin-static-prod.yaml
+          data-id: new-ic-admin-static-prod.yaml
           group: DEFAULT_GROUP
           refresh: false
         #动态配置文件
         extension-configs[1]:
-          data-id: new-bhg-admin-dynamic-prod.yaml
+          data-id: new-ic-admin-dynamic-prod.yaml
           group: DEFAULT_GROUP
           refresh: true

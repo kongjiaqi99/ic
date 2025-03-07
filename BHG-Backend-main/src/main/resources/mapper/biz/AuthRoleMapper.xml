@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.bhg.bhgadmin.mapper.AuthRoleMapper">
-  <resultMap id="BaseResultMap" type="com.bhg.bhgadmin.entity.AuthRoleEntity">
+<mapper namespace="com.ic.icadmin.mapper.AuthRoleMapper">
+  <resultMap id="BaseResultMap" type="com.ic.icadmin.entity.AuthRoleEntity">
     <!--@mbg.generated-->
     <!--@Table auth_role-->
     <id column="id" jdbcType="BIGINT" property="id" />
@@ -18,7 +18,7 @@
     id, role_name, active_flag, del_flag, create_by, create_time, update_by, update_time
   </sql>
 
-  <select id="queryRoles" resultType="com.bhg.bhgadmin.dto.response.admin.RoleResponse">
+  <select id="queryRoles" resultType="com.ic.icadmin.dto.response.admin.RoleResponse">
     select id, role_name from auth_role
     where del_flag = false and active_flag = true
     order by id

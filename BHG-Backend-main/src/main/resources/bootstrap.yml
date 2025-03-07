@@ -1,6 +1,6 @@
 spring:
   application:
-    name: new-bhg-admin
+    name: new-ic-admin
   profiles:
     active: dev
 server:

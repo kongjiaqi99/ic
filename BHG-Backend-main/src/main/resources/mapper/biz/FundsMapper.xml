@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.bhg.bhgadmin.mapper.FundsMapper">
-  <resultMap id="BaseResultMap" type="com.bhg.bhgadmin.entity.FundsEntity">
+<mapper namespace="com.ic.icadmin.mapper.FundsMapper">
+  <resultMap id="BaseResultMap" type="com.ic.icadmin.entity.FundsEntity">
     <!--@mbg.generated-->
     <!--@Table funds-->
     <id column="id" jdbcType="BIGINT" property="id" />
@@ -107,12 +107,12 @@
     cover_cn_three,
     cover_cn_four,company
   </sql>
-  <select id="getFundsNames" resultType="com.bhg.bhgadmin.dto.response.financings.FundsNameResponse">
+  <select id="getFundsNames" resultType="com.ic.icadmin.dto.response.financings.FundsNameResponse">
     select id as id, name as name, b_fund_category as bFundCategory from funds
     where del_flag = false
     order by id desc
   </select>
-  <select id="getFundsNamesCN" resultType="com.bhg.bhgadmin.dto.response.financings.FundsNameResponse">
+  <select id="getFundsNamesCN" resultType="com.ic.icadmin.dto.response.financings.FundsNameResponse">
     select id as id, name_cn as nameCN, b_fund_category as bFundCategory from funds
     where del_flag = false
     order by id desc

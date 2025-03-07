@@ -17,7 +17,7 @@ const { VITE_WEB_ENV } = wrapperEnv
 const { setBreadcrumbList } = useApp()
 const { downloadFile } = useDownLoad()
 const router = useRouter()
-const webColor = VITE_WEB_ENV === 'bhg' ? '#BE9670' : '#AD262F'
+const webColor = VITE_WEB_ENV === 'ic' ? '#BE9670' : '#AD262F'
 
 const rightPanel = ref<any>()
 const rightPanel2 = ref<any>()
@@ -55,8 +55,8 @@ const options = [
     },
     {
         value: 1,
-        label: 'BHG ID',
-        name: 'bhgId'
+        label: 'ic ID',
+        name: 'icId'
     },
     {
         value: 2,
@@ -474,7 +474,7 @@ provide(EntityKey, { eId: ref(null), clientInfo: clientInfo, entityInfo: {} })
                         </div>
                     </template>
                 </el-table-column>
-                <el-table-column prop="bhgId" label="BHG ID" :align="'left'" width="150" />
+                <el-table-column prop="icId" label="ic ID" :align="'left'" width="150" />
                 <el-table-column prop="entityName" label="Entity" :align="'left'" width="150" />
                 <el-table-column prop="fundName" label="Fund" width="200" />
                 <el-table-column prop="monthReturn" label="Current investment return" width="200" :align="'center'">

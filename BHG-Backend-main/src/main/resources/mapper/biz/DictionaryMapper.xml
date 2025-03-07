@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.bhg.bhgadmin.mapper.DictionaryMapper">
-  <resultMap id="BaseResultMap" type="com.bhg.bhgadmin.entity.DictionaryEntity">
+<mapper namespace="com.ic.icadmin.mapper.DictionaryMapper">
+  <resultMap id="BaseResultMap" type="com.ic.icadmin.entity.DictionaryEntity">
     <!--@mbg.generated-->
     <!--@Table "dictionary"-->
     <id column="id" jdbcType="BIGINT" property="id" />

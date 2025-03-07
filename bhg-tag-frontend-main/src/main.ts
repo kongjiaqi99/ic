@@ -16,9 +16,9 @@ const { VITE_WEB_ENV } = wrapperEnv
 const app = createApp(App)
 
 //读取配置设置不同的网站icon与title
-document.title = VITE_WEB_ENV === 'bhg' ? 'BHG' : 'BCUC'
+document.title = VITE_WEB_ENV === 'ic' ? 'ic' : 'BCUC'
 const link: any = document.querySelector("link[rel*='icon']")
-link.href = VITE_WEB_ENV === 'bhg' ? './favicon.ico' : './favicon-bcuc.ico'
+link.href = VITE_WEB_ENV === 'ic' ? './favicon.ico' : './favicon-bcuc.ico'
 
 app.use(store)
 app.use(router)

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.bhg.bhgadmin.mapper.AuthPermissionMapper">
-  <resultMap id="BaseResultMap" type="com.bhg.bhgadmin.entity.AuthPermissionEntity">
+<mapper namespace="com.ic.icadmin.mapper.AuthPermissionMapper">
+  <resultMap id="BaseResultMap" type="com.ic.icadmin.entity.AuthPermissionEntity">
     <!--@mbg.generated-->
     <!--@Table auth_permission-->
     <id column="id" jdbcType="BIGINT" property="id" />
@@ -21,7 +21,7 @@
     id, permission_name, active_flag, del_flag, create_by, create_time, update_by, update_time, 
     permission_code, permission_level, upper_permission_id
   </sql>
-  <select id="queryPermsByRoleId" resultType="com.bhg.bhgadmin.dto.biz.BizPermissionsDTO">
+  <select id="queryPermsByRoleId" resultType="com.ic.icadmin.dto.biz.BizPermissionsDTO">
     SELECT ap.id, ap.permission_name, ap.permission_code, ap.upper_permission_id, ap.permission_level FROM auth_permission ap LEFT JOIN
     auth_permission_role apr
     on ap.id = apr.permission_id

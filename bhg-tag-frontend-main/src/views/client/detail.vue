@@ -21,7 +21,7 @@ const loading = ref(true)
 const showStatement = ref(false)
 const showStatementYear = ref(false)
 const showPurchaseRecord = ref(true)
-const webColor = VITE_WEB_ENV === 'bhg' ? '#BE9670' : '#AD262F'
+const webColor = VITE_WEB_ENV === 'ic' ? '#BE9670' : '#AD262F'
 
 
 //导入rightPanel数组
@@ -680,7 +680,7 @@ provide(ClientKey, { cId: clientId })
                             }}
                         </el-tag>
                     </div>
-                    <div class="bhg-id">BHG ID: {{ item.bhgId }}</div>
+                    <div class="ic-id">ic ID: {{ item.icId }}</div>
                     <div class="email">{{ item.emailList ? item.emailList.join(',') : '' }}</div>
                     <div class="address">
                         <el-icon>
@@ -1243,7 +1243,7 @@ provide(ClientKey, { cId: clientId })
                     font-weight: 700;
                 }
 
-                .bhg-id,
+                .ic-id,
                 .email {
                     line-height: 1.3;
                     font-size: 12px;

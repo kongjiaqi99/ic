@@ -1,0 +1,1 @@
+export { default as CreateOrEditReferral } from './CreateOrEditReferral.vue'

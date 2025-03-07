@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bhg.bhgadmin.mapper.FundsMapper">
+  <resultMap id="BaseResultMap" type="com.bhg.bhgadmin.entity.FundsEntity">
+    <!--@mbg.generated-->
+    <!--@Table funds-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="name_cn" jdbcType="VARCHAR" property="nameCN" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="description_cn" jdbcType="VARCHAR" property="descriptionCN" />
+    <result column="settlement_date" jdbcType="DATE" property="settlementDate" />
+    <result column="interest_starts_date" jdbcType="DATE" property="interestStartsDate" />
+    <result column="amount" jdbcType="NUMERIC" property="amount" />
+    <result column="currency" jdbcType="VARCHAR" property="currency" />
+    <result column="currency_cn" jdbcType="VARCHAR" property="currencyCN" />
+    <result column="fund_type" jdbcType="VARCHAR" property="fundType" />
+    <result column="fund_type_cn" jdbcType="VARCHAR" property="fundTypeCN" />
+    <result column="investment_type" jdbcType="VARCHAR" property="investmentType" />
+    <result column="investment_type_cn" jdbcType="VARCHAR" property="investmentTypeCN" />
+    <result column="product_type" jdbcType="VARCHAR" property="productType" />
+    <result column="product_type_cn" jdbcType="VARCHAR" property="productTypeCN" />
+    <result column="purchase_min_amount" jdbcType="VARCHAR" property="purchaseMinAmount" />
+    <result column="investment_cycle" jdbcType="VARCHAR" property="investmentCycle" />
+    <result column="investment_cycle_cn" jdbcType="VARCHAR" property="investmentCycleCN" />
+    <result column="fix_net_return" jdbcType="VARCHAR" property="fixNetReturn" />
+    <result column="fix_net_return_cn" jdbcType="VARCHAR" property="fixNetReturnCN" />
+    <result column="float_net_return" jdbcType="VARCHAR" property="floatNetReturn" />
+    <result column="float_net_return_cn" jdbcType="VARCHAR" property="floatNetReturnCN" />
+    <result column="application_fee_rate" jdbcType="VARCHAR" property="applicationFeeRate" />
+    <result column="application_fee_rate_cn" jdbcType="VARCHAR" property="applicationFeeRateCN" />
+    <result column="management_fee_rate" jdbcType="VARCHAR" property="managementFeeRate" />
+    <result column="management_fee_rate_cn" jdbcType="VARCHAR" property="managementFeeRateCN" />
+    <result column="im_file_path" jdbcType="VARCHAR" property="imFilePath" />
+    <result column="introduce_file_path" jdbcType="VARCHAR" property="introduceFilePath" />
+    <result column="eoi_file_path" jdbcType="VARCHAR" property="eoiFilePath" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="net_return_a" jdbcType="VARCHAR" property="netReturnA" />
+    <result column="net_return_a_cn" jdbcType="VARCHAR" property="netReturnACN" />
+    <result column="net_return_b" jdbcType="VARCHAR" property="netReturnB" />
+    <result column="net_return_b_cn" jdbcType="VARCHAR" property="netReturnBCN" />
+    <result column="cash_divided_cycle" jdbcType="VARCHAR" property="cashDividedCycle" />
+    <result column="cash_divided_cycle_cn" jdbcType="VARCHAR" property="cashDividedCycleCN" />
+    <result column="performance_fee_rate" jdbcType="VARCHAR" property="performanceFeeRate" />
+    <result column="performance_fee_rate_cn" jdbcType="VARCHAR" property="performanceFeeRateCN" />
+    <result column="investment_strategy" jdbcType="VARCHAR" property="investmentStrategy" />
+    <result column="investment_strategy_cn" jdbcType="VARCHAR" property="investmentStrategyCN" />
+    <result column="nature_yearly_return" jdbcType="VARCHAR" property="natureYearlyReturn" />
+    <result column="nature_yearly_return_cn" jdbcType="VARCHAR" property="natureYearlyReturnCN" />
+    <result column="value_yearly_return" jdbcType="VARCHAR" property="valueYearlyReturn" />
+    <result column="value_yearly_return_cn" jdbcType="VARCHAR" property="valueYearlyReturnCN" />
+    <result column="subscription_fee_rate" jdbcType="VARCHAR" property="subscriptionFeeRate" />
+    <result column="subscription_fee_rate_cn" jdbcType="VARCHAR" property="subscriptionFeeRateCN" />
+    <result column="report_file_path" jdbcType="VARCHAR" property="reportFilePath" />
+    <result column="language" jdbcType="INTEGER" property="language" />
+    <result column="trans_id" jdbcType="BIGINT" property="transId" />
+    <result column="additional_investment_file" jdbcType="VARCHAR" property="additionalInvestmentFile" />
+    <result column="display_order" jdbcType="INTEGER" property="displayOrder" />
+    <result column="constitution_file" jdbcType="VARCHAR" property="constitutionFile" />
+    <result column="b_fund_category" jdbcType="INTEGER" property="bFundCategory" />
+    <result column="b_project_duration_month" jdbcType="INTEGER" property="bProjectDurationMonth" />
+    <result column="b_yearly_return_rate" jdbcType="NUMERIC" property="bYearlyReturnRate" />
+    <result column="b_delayed_growth_rate" jdbcType="NUMERIC" property="bDelayedGrowthRate" />
+    <result column="fully_subscription" jdbcType="BOOLEAN" property="fullySubscription" />
+    <result column="fund_status" jdbcType="INTEGER" property="fundStatus" />
+    <result column="end_date" jdbcType="DATE" property="endDate" />
+    <result column="sub_im_file_path" jdbcType="VARCHAR" property="subImFilePath" />
+    <result column="application_form" jdbcType="VARCHAR" property="applicationForm" />
+    <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
+    <result column="sub_im_date" jdbcType="DATE" property="subImDate" />
+    <result column="deed_date" jdbcType="DATE" property="deedDate" />
+    <result column="cover" jdbcType="VARCHAR" property="cover" />
+    <result column="cover_cn" jdbcType="VARCHAR" property="coverCn" />
+    <result column="cover_two" jdbcType="VARCHAR" property="coverTwo" />
+    <result column="cover_cn_two" jdbcType="VARCHAR" property="coverCnTwo" />
+    <result column="cover_three" jdbcType="VARCHAR" property="coverThree" />
+    <result column="cover_cn_three" jdbcType="VARCHAR" property="coverCnThree" />
+    <result column="cover_four" jdbcType="VARCHAR" property="coverFour" />
+    <result column="cover_cn_four" jdbcType="VARCHAR" property="coverCnFour" />
+    <result column="popular" jdbcType="INTEGER" property="popular" />
+    <result column="state_en" jdbcType="VARCHAR" property="stateEn" />
+    <result column="state_cn" jdbcType="VARCHAR" property="stateCn" />
+    <result column="company" jdbcType="VARCHAR" property="company" />
+    <result column="state_id" jdbcType="INTEGER" property="stateId" />
+    <result column="extend_start_date" jdbcType="DATE" property="extendStartDate" />
+    <result column="default_start_date" jdbcType="DATE" property="defaultStartDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, "name", description, settlement_date, interest_starts_date, amount, currency, fund_type, investment_type,
+    product_type, purchase_min_amount, investment_cycle, fix_net_return, float_net_return, 
+    application_fee_rate, management_fee_rate, im_file_path, introduce_file_path, eoi_file_path, 
+    created_at, updated_at, net_return_a, net_return_b, cash_divided_cycle, performance_fee_rate, 
+    investment_strategy, nature_yearly_return, value_yearly_return, subscription_fee_rate, 
+    report_file_path, "language", trans_id, additional_investment_file, display_order, 
+    constitution_file, b_fund_category, b_project_duration_month, b_yearly_return_rate, 
+    b_delayed_growth_rate, fully_subscription, fund_status, end_date, sub_im_file_path, 
+    application_form, del_flag,description_cn,name_cn,fund_type_cn,investment_type_cn,product_type_cn,
+    cash_divided_cycle_cn,currency_cn,investment_cycle_cn,fix_net_return_cn,float_net_return_cn,application_fee_rate_cn,
+    management_fee_rate_cn,net_return_a_cn,net_return_b_cn,performance_fee_rate_cn,investment_strategy_cn,
+    nature_yearly_return_cn,value_yearly_return_cn,subscription_fee_rate_cn,sub_im_date,deed_date,cover,cover_cn,popular,
+    state_id,state_cn,state_en, extend_start_date, default_start_date,cover_two,
+    cover_three,
+    cover_four,
+    cover_cn_two,
+    cover_cn_three,
+    cover_cn_four,company
+  </sql>
+  <select id="getFundsNames" resultType="com.bhg.bhgadmin.dto.response.financings.FundsNameResponse">
+    select id as id, name as name, b_fund_category as bFundCategory from funds
+    where del_flag = false
+    order by id desc
+  </select>
+  <select id="getFundsNamesCN" resultType="com.bhg.bhgadmin.dto.response.financings.FundsNameResponse">
+    select id as id, name_cn as nameCN, b_fund_category as bFundCategory from funds
+    where del_flag = false
+    order by id desc
+  </select>
+    <select id="selectListByRequest" resultMap="BaseResultMap">
+      select <include refid="Base_Column_List"/> from funds
+      <where>
+        and del_flag = false
+        <if test="fundCategory != null">
+          and b_fund_category = #{fundCategory}
+        </if>
+        <if test="fundStatus != null">
+          and fund_status = #{fundStatus}
+        </if>
+        <if test="fundStatusList != null and fundStatusList.size() > 0">
+          and fund_status in
+          <foreach collection="fundStatusList" open="(" separator="," close=")" item="status">
+            #{status}
+          </foreach>
+        </if>
+        <if test="popular != null">
+          and popular = #{popular}
+        </if>
+        <if test="stateId != null">
+          and state_id = #{stateId}
+        </if>
+        <if test="fundType != null and fundType != ''">
+          and fund_type ilike '%'||#{fundType}||'%'
+        </if>
+        <if test="investmentType != null and investmentType != ''">
+          and investment_type ilike '%'||#{investmentType}||'%'
+        </if>
+        <if test="productType != null and productType != ''">
+          and product_type ilike '%'||#{productType}||'%'
+        </if>
+        <if test="name != null and name != ''">
+          and (name ilike '%'||#{name}||'%' or name_cn ilike '%'||#{name}||'%')
+        </if>
+        <if test="idList != null and idList.size() > 0">
+          and id in
+          <foreach collection="idList" open="(" separator="," close=")" item="id">
+            #{id}
+          </foreach>
+        </if>
+        <if test="excludeIdList != null and excludeIdList.size() > 0">
+          and id not in
+          <foreach collection="excludeIdList" open="(" separator="," close=")" item="id">
+            #{id}
+          </foreach>
+        </if>
+        <if test="company != null and company != ''">
+          and company ilike '%'||#{company}||'%'
+        </if>
+      </where>
+      order by id desc
+    </select>
+</mapper>

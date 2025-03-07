@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bhg.bhgadmin.mapper.FinancingsMapper">
+  <resultMap id="BaseResultMap" type="com.bhg.bhgadmin.entity.FinancingsEntity">
+    <!--@mbg.generated-->
+    <!--@Table financings-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="client_id" jdbcType="BIGINT" property="clientId" />
+    <result column="fund_id" jdbcType="BIGINT" property="fundId" />
+    <result column="financing_amount" jdbcType="NUMERIC" property="financingAmount" />
+    <result column="commission_rate" jdbcType="NUMERIC" property="commissionRate" />
+    <result column="commission_amount" jdbcType="NUMERIC" property="commissionAmount" />
+    <result column="currency" jdbcType="VARCHAR" property="currency" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="referral_agreement" jdbcType="VARCHAR" property="referralAgreement" />
+    <result column="target_amount" jdbcType="NUMERIC" property="targetAmount" />
+    <result column="target_date" jdbcType="DATE" property="targetDate" />
+    <result column="achieve_target" jdbcType="BOOLEAN" property="achieveTarget" />
+    <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
+    <result column="gst" jdbcType="BOOLEAN" property="gst" />
+    <result column="entity_id" jdbcType="BIGINT" property="entityId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, client_id, fund_id, financing_amount, commission_rate, commission_amount, currency, 
+    created_at, updated_at, referral_agreement, target_amount, target_date, achieve_target, 
+    del_flag,gst,entity_id
+  </sql>
+
+  <select id="queryFinancingsResponses"
+          resultType="com.bhg.bhgadmin.dto.response.financings.FinancingsResponse">
+    select fi.id as id, fi.client_id as clientId, c.name as clientName, fi.fund_id as fundId, f.name as fundName,
+      fi.commission_rate as commissionRate, fi.commission_amount as commissionAmount,
+      fi.target_amount as targetAmount,
+      fi.currency as currency, fi.created_at as createAtDate, f.b_yearly_return_rate as bYearlyReturnRate,
+      fi.gst, entity_id as entityId, ie.entity_name as entityName, fi.updated_at as updateAtDate
+    from financings fi
+    left join clients c on fi.client_id = c.id
+    left join funds f on f.id = fi.fund_id
+    left join investment_entities ie on ie.id = fi.entity_id
+    where fi.del_flag = false and c.del_flag = false and f.del_flag = false and ie.del_flag = false
+    <if test="clientId != null">
+      and fi.client_id = #{clientId,jdbcType=BIGINT}
+    </if>
+    <if test="fundId != null">
+      and fi.fund_id = #{fundId,jdbcType=BIGINT}
+    </if>
+    <if test="entityId != null">
+      and ie.id = #{entityId,jdbcType=BIGINT}
+    </if>
+
+    <if test="clientName != null and clientName != ''">
+      and c.name  ilike '%'||#{clientName}||'%'
+    </if>
+    <if test="fundName != null and fundName != ''">
+      and f.name  ilike '%'||#{fundName}||'%'
+    </if>
+    <if test="entityName != null and entityName != ''">
+      ie.entity_name ilike '%'||#{entityName}||'%'
+    </if>
+    order by fi.id desc
+  </select>
+
+  <select id="queryFinancingById"
+          resultType="com.bhg.bhgadmin.dto.response.financings.FinancingDetailResponse">
+    select fi.id as id, fi.client_id as clientId, c.name as clientName, fi.fund_id as fundId, f.name as fundName,
+           fi.commission_rate as commissionRate, fi.commission_amount as commissionAmount,
+           fi.target_amount as targetAmount,
+           fi.currency as currency, fi.created_at as createAtDate, fi.updated_at as updateAtDate,
+           f.b_yearly_return_rate as bYearlyReturnRate, fi.entity_id as entityId, ie.entity_name as entityName,
+           gst
+    from financings fi
+    left join clients c on fi.client_id = c.id
+    left join funds f on f.id = fi.fund_id
+    left join investment_entities ie on ie.id = fi.entity_id
+    where fi.id = #{id,jdbcType=BIGINT}
+    and fi.del_flag = false and c.del_flag = false and f.del_flag = false and ie.del_flag = false
+  </select>
+
+  <select id="queryFinancingByIdWhenEdit"
+          resultType="com.bhg.bhgadmin.dto.response.financings.FinancingEditDetailResponse">
+    select fi.id as id, fi.client_id as clientId, c.name as clientName, fi.fund_id as fundId, f.name as fundName,
+           fi.commission_rate as commissionRate, fi.commission_amount as commissionAmount,
+           fi.target_amount as targetAmount, fi.financing_amount as financingAmount,
+           fi.currency as currency, fi.target_date as targetDate, fi.achieve_target as achieveTarget, fi.gst,
+           fi.entity_id as entityId, ie.entity_name as entityName
+    from financings fi
+    left join clients c on fi.client_id = c.id
+    left join funds f on f.id = fi.fund_id
+    left join investment_entities ie on ie.id = fi.entity_id
+    where fi.id = #{id,jdbcType=BIGINT}
+    and fi.del_flag = false and c.del_flag = false and f.del_flag = false
+    and ie.del_flag = false
+  </select>
+</mapper>

@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bhg.bhgadmin.mapper.PurchasedFundsMapper">
+  <resultMap id="BaseResultMap" type="com.bhg.bhgadmin.entity.PurchasedFundsEntity">
+    <!--@mbg.generated-->
+    <!--@Table purchased_funds-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="client_id" jdbcType="BIGINT" property="clientId" />
+    <result column="fund_id" jdbcType="BIGINT" property="fundId" />
+    <result column="unit_certificate_date" jdbcType="DATE" property="unitCertificateDate" />
+    <result column="purchase_amount" jdbcType="NUMERIC" property="purchaseAmount" />
+    <result column="current_return" jdbcType="NUMERIC" property="currentReturn" />
+    <result column="dividend_amount" jdbcType="NUMERIC" property="dividendAmount" />
+    <result column="dividend_cycle" jdbcType="VARCHAR" property="dividendCycle" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="unit_certi" jdbcType="VARCHAR" property="unitCerti" />
+    <result column="entity_name" jdbcType="VARCHAR" property="entityName" />
+    <result column="address_line" jdbcType="VARCHAR" property="addressLine" />
+    <result column="suburb" jdbcType="VARCHAR" property="suburb" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="postcode" jdbcType="VARCHAR" property="postcode" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="investment_entity_id" jdbcType="BIGINT" property="investmentEntityId" />
+    <result column="uc_no" jdbcType="VARCHAR" property="ucNo" />
+    <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
+    <result column="purchase_end_date" jdbcType="DATE" property="purchaseEndDate" />
+    <result column="transaction_date" jdbcType="DATE" property="transactionDate" />
+    <result column="application_form_signed" jdbcType="VARCHAR" property="applicationFormSigned" />
+    <result column="application_form_signed_two" jdbcType="VARCHAR" property="applicationFormSignedTwo" />
+    <result column="application_form_signed_three" jdbcType="VARCHAR" property="applicationFormSignedThree" />
+    <result column="application_form_signed_four" jdbcType="VARCHAR" property="applicationFormSignedFour" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, client_id, fund_id, unit_certificate_date, purchase_amount, current_return, dividend_amount,
+    dividend_cycle, created_at, updated_at, unit_certi, entity_name, address_line, suburb, 
+    "state", postcode, country, investment_entity_id, uc_no, del_flag, purchase_end_date, transaction_date, application_form_signed, application_form_signed_two,
+      application_form_signed_three,
+      application_form_signed_four
+  </sql>
+    <resultMap id="BizPurchasedFundsDTOMap" type="com.bhg.bhgadmin.dto.biz.BizPurchasedFundsDTO">
+        <result column="emailList" jdbcType="VARCHAR" property="emailList" typeHandler="com.bhg.bhgadmin.config.handler.StringListHandler"/>
+    </resultMap>
+  <select id="queryPurchasedFunds" resultMap="BizPurchasedFundsDTOMap">
+    select pf.id, pf.client_id, c.name as clientName, c.email as clientEmail, pf.fund_id, f.name as fundName, f.b_fund_category as bFundCategory,
+    f.b_project_duration_month as bProjectDurationMonth, pf.unit_certificate_date, pf.purchase_amount, pf.current_return,
+    pf.dividend_amount, pf.dividend_cycle, pf.created_at, pf.updated_at, pf.unit_certi, pf.entity_name,
+      pf.address_line, pf.suburb, pf.state, pf.postcode, pf.country, pf.investment_entity_id, pf.uc_no,
+      pf.purchase_end_date, f.b_yearly_return_rate as bYearlyReturnRate,
+    f.end_date as endDate, f.settlement_date as settlementDate, f.interest_starts_date as interestStartDate,
+      pf.application_form_signed,pf.application_form_signed_two,
+      pf.application_form_signed_three,
+      pf.application_form_signed_four, pf.transaction_date,ie.entity_name as entityName, ie.email_list as emailList,
+      ie.bhg_id as bhgId,
+      f.default_start_date as defaultStartDate,
+      f.b_delayed_growth_rate as bDelayedGrowthRate,
+      f.created_at as fundCreateAt, f.extend_start_date as extendStartDate,
+      f.default_start_date as defaultStartDate,
+      ie.withheld_tax as withheldTax, ie.bsb,
+      ie.account_number accountNumber, ie.account_name accountName
+    from purchased_funds pf
+    left join clients c on pf.client_id = c.id
+    left join funds f on pf.fund_id = f.id
+    left join investment_entities ie on pf.investment_entity_id = ie.id
+    where
+    <if test="request.clientId != null">
+      pf.client_id = #{request.clientId} and
+    </if>
+    <if test="request.fundId != null">
+      pf.fund_id = #{request.fundId} and
+    </if>
+      <if test="request.entityId != null">
+          pf.investment_entity_id = #{request.entityId} and
+      </if>
+    <if test="request.fundCategory != null">
+      f.b_fund_category = #{request.fundCategory} and
+    </if>
+    <if test="request.idList != null and request.idList.size() > 0">
+        pf.id in
+        <foreach collection="request.idList" open="(" separator="," close=")" item="id">
+            #{id}
+        </foreach>
+        and
+    </if>
+    <if test="request.fundName != null and request.fundName != ''">
+      f.name ilike '%'||#{request.fundName}||'%' and
+    </if>
+    <if test="(request.entityName != null and request.entityName != '') ">
+      ie.entity_name ilike '%'||#{request.entityName}||'%' and
+    </if>
+    <if test="(request.bhgId != null and request.bhgId != '')">
+      ie.bhg_id ilike '%'||#{request.bhgId}||'%' and
+    </if>
+    <if test="request.clientName != null and request.clientName != ''">
+      c.name ilike '%'||#{request.clientName}||'%' and
+    </if>
+    pf.del_flag = false and
+    ie.del_flag = false and
+    c.del_flag = false
+    order by pf.id desc
+  </select>
+
+  <select id="queryPurchasedFundById" parameterType="java.lang.Long"
+          resultType="com.bhg.bhgadmin.dto.biz.BizPurchasedFundsDTO">
+      select pf.id,
+             pf.client_id,
+             c.name                     as clientName,
+             c.email                    as clientEmail,
+             pf.fund_id,
+             f.name                     as fundName,
+             f.b_fund_category          as bFundCategory,
+             f.b_project_duration_month as bProjectDurationMonth,
+             pf.unit_certificate_date,
+             pf.purchase_amount,
+             pf.current_return,
+             pf.dividend_amount,
+             pf.dividend_cycle,
+             pf.created_at,
+             pf.updated_at,
+             pf.entity_name,
+             ie.entity_name             as investmentEntityName,
+             pf.unit_certi,
+             pf.investment_entity_id,
+             f.b_yearly_return_rate     as bYearlyReturnRate,
+
+             f.settlement_date               as settlementDate,
+             f.interest_starts_date     as interestStartDate,
+             pf.purchase_end_date,
+             pf.transaction_date,
+             pf.application_form_signed,
+             pf.application_form_signed_two,
+             pf.application_form_signed_three,
+             pf.application_form_signed_four,
+             pf.uc_no,
+             pf.address_line,
+             pf.suburb,
+             pf.state,
+             pf.postcode,
+            f.end_date                 as endDate,
+            f.default_start_date as defaultStartDate,
+            f.b_delayed_growth_rate as bDelayedGrowthRate,
+            f.created_at as fundCreateAt
+      from purchased_funds pf
+               left join clients c on pf.client_id = c.id
+               left join funds f on pf.fund_id = f.id
+               left join investment_entities ie on pf.investment_entity_id = ie.id
+      where pf.id = #{id} and pf.del_flag = false
+  </select>
+
+    <select id="queryPurchasedFundsForFinancings" parameterType="java.lang.Long"
+            resultType="com.bhg.bhgadmin.dto.biz.BizPurchasedFundsDTO">
+        select pf.id, pf.client_id, c.name as clientName, pf.fund_id, f.name as fundName, f.b_fund_category as bFundCategory,
+        f.b_project_duration_month as bProjectDurationMonth, pf.unit_certificate_date, pf.purchase_amount, pf.current_return,
+        pf.dividend_amount, pf.dividend_cycle, pf.created_at, pf.updated_at, pf.unit_certi, pf.entity_name,
+        pf.address_line, pf.suburb, pf.state, pf.postcode, pf.country, pf.investment_entity_id, pf.uc_no,
+        f.b_yearly_return_rate
+        as
+        bYearlyReturnRate,
+        f.end_date as endDate, f.settlement_date as settlementDate, f.interest_starts_date as interestStartDate,
+        pf.purchase_end_date, pf.transaction_date, pf.application_form_signed,
+        f.default_start_date as defaultStartDate,
+        f.b_delayed_growth_rate as bDelayedGrowthRate,
+        f.created_at as fundCreateAt
+        from purchased_funds pf
+        left join clients c on pf.client_id = c.id
+        left join funds f on pf.fund_id = f.id
+        left join investment_entities ie on ie.id = pf.investment_entity_id
+        where
+        <if test="clientIds != null and clientIds.size() != 0">
+            pf.client_id in
+            <foreach collection="clientIds" index="index" item="clientId" open="(" separator="," close=")">
+            #{clientId}
+            </foreach>
+            and
+        </if>
+        <if test="entityIds != null and entityIds.size() != 0">
+            pf.investment_entity_id in
+            <foreach collection="entityIds" index="index" item="entityId" open="(" separator="," close=")">
+                #{entityId}
+            </foreach>
+            and
+        </if>
+        pf.fund_id = #{fundId} and
+        pf.del_flag = false
+        order by pf.id
+    </select>
+
+    <select id="queryPurchasedFundsForClientAPI" parameterType="java.lang.Long"
+            resultType="com.bhg.bhgadmin.dto.biz.BizPurchasedFundsDTO">
+        select pf.id, pf.client_id, pf.fund_id, f.name as fundName, f.b_fund_category as bFundCategory,
+        f.b_project_duration_month as bProjectDurationMonth, pf.unit_certificate_date, pf.purchase_amount, pf.current_return,
+        pf.dividend_amount, pf.dividend_cycle, pf.created_at, pf.updated_at, pf.unit_certi, pf.entity_name,
+        pf.address_line, pf.suburb, pf.state, pf.postcode, pf.country, pf.investment_entity_id, pf.uc_no,
+        f.b_yearly_return_rate
+        as
+        bYearlyReturnRate,
+        f.end_date as endDate, f.settlement_date as settlementDate, f.interest_starts_date as interestStartDate,
+        pf.purchase_end_date, pf.transaction_date, pf.application_form_signed,             pf.application_form_signed_two,
+        pf.application_form_signed_three,
+        pf.application_form_signed_four,
+        f.default_start_date as defaultStartDate,
+        f.b_delayed_growth_rate as bDelayedGrowthRate,
+        f.created_at as fundCreateAt
+        from purchased_funds pf
+        left join funds f on pf.fund_id = f.id
+        where pf.client_id = #{clientId} and
+        pf.del_flag = false and f.del_flag = false
+        order by pf.id
+    </select>
+    <select id="selectInvestmentList" resultType="com.bhg.bhgadmin.dto.response.investment.InvestmentResponse">
+        select
+        pf.fund_id fundId,
+        f.name fundName,
+        c.name clientName,
+        ie.entity_name entityName,
+        ie.bhg_id bhgId,
+        pf.client_id clientId,
+        pf.investment_entity_id entityId,
+<!--        sum(pf.purchase_amount) as purchasedAmount,-->
+        count(pf.id) as recordCount,
+        array_agg(pf.id) pfId
+        from purchased_funds pf
+        inner join funds f on pf.fund_id = f.id
+        inner join investment_entities ie on pf.investment_entity_id = ie.id
+        inner join clients c on pf.client_id = c.id
+        <where>
+            <if test="fundId != null">
+                and pf.fund_id = #{fundId}
+            </if>
+            <if test="clientId != null">
+                and pf.client_id = #{clientId}
+            </if>
+            <if test="investmentEntityId != null">
+                and pf.investment_entity_id = #{investmentEntityId}
+            </if>
+            <if test="fundName != null and fundName != ''">
+                and f.name ilike '%'||#{fundName}||'%'
+            </if>
+            <if test="(entityName != null and entityName != '') ">
+                and ie.entity_name ilike '%'||#{entityName}||'%'
+            </if>
+            <if test="(bhgId != null and bhgId != '')">
+                and ie.bhg_id ilike '%'||#{bhgId}||'%'
+            </if>
+            <if test="clientName != null and clientName != ''">
+                and c.name ilike '%'||#{clientName}||'%'
+            </if>
+            and pf.del_flag = false and pf.purchase_amount is not null
+            and pf.unit_certificate_date is not null
+            and c.del_flag = false
+        </where>
+        group by pf.fund_id, pf.investment_entity_id, pf.client_id, f.name ,
+        c.name ,
+        ie.entity_name ,ie.bhg_id
+        order by max(pf.created_at) desc
+    </select>
+    <select id="selectInvestCount" resultType="java.lang.Integer">
+        select count(1) from (select count(1)
+        from purchased_funds pf
+        inner join funds f on pf.fund_id = f.id
+        inner join investment_entities ie on pf.investment_entity_id = ie.id
+        inner join clients c on pf.client_id = c.id
+        <where>
+            and pf.del_flag = false
+            and pf.purchase_amount is not null
+            and pf.unit_certificate_date is not null
+        </where>
+        group by pf.fund_id, pf.investment_entity_id, pf.client_id
+        order by max(pf.id) desc) temp
+    </select>
+    <select id="getPopularFundId" resultType="java.lang.Long">
+        select id from funds
+        where del_flag = false
+        and popular > 0
+        order by created_at desc limit 6;
+    </select>
+    <select id="getInvestmentCount" resultType="com.bhg.bhgadmin.dto.response.client.InvestmentEntityResponse">
+        select count(distinct (fund_id)) as investmentCount,
+            investment_entity_id as id
+        from purchased_funds pf
+        <where>
+            <if test="entityIds != null and entityIds.size() != 0">
+            and pf.investment_entity_id in
+            <foreach collection="entityIds" index="index" item="entityId" open="(" separator="," close=")">
+                #{entityId}
+            </foreach>
+            </if>
+            and pf.del_flag = false
+        </where>
+        group by investment_entity_id;
+    </select>
+</mapper>

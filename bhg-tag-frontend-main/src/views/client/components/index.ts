@@ -1,5 +1,0 @@
-export { default as CreateClient } from './CreateClient.vue'
-export { default as EditClient } from './EditClient.vue'
-export { default as CreateOrEditEntity } from './CreateOrEditEntity.vue'
-export { default as CreateInvestment } from './CreateInvestment.vue'
-export { default as CreatePurchase } from './CreatePurchase.vue'

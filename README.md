@@ -182,7 +182,7 @@ Run the following command to create the necessary tables and database structures
 ```bash
 psql -h localhost -p 5434 -U postgres -d postgres -f schema.sql
 psql -h localhost -p 5434 -U postgres -d postgres -f data.sql
-pg_restore -h localhost -p 5434 -U postgres -d postgres -v ./new_bhg_admin_production05112024.backup
+pg_restore -h localhost -p 5434 -U postgres -d postgres -v ./icdb-data.backup
 ```
 
 

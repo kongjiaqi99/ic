@@ -180,9 +180,9 @@ To set up the database schema and initial data in PostgreSQL, follow these steps
 Run the following command to create the necessary tables and database structures as defined in `schema.sql`:
 
 ```bash
-psql -h localhost -p 5434 -U postgres -d postgres -f schema.sql
-psql -h localhost -p 5434 -U postgres -d postgres -f data.sql
-pg_restore -h localhost -p 5434 -U postgres -d postgres -v ./icdb-data.backup
+psql -h localhost -p 5434 -U postgres -d icdb -f schema.sql
+psql -h localhost -p 5434 -U postgres -d icdb -f data.sql
+pg_restore -h localhost -p 5434 -U postgres -d icdb -v ./icdb-data.backup
 ```
 
 

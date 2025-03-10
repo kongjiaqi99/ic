@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ic.icadmin.mapper.EventsMapper">
+  <resultMap id="BaseResultMap" type="com.ic.icadmin.entity.EventsEntity">
+    <!--@mbg.generated-->
+    <!--@Table events-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="city" jdbcType="INTEGER" property="city" />
+    <result column="location" jdbcType="VARCHAR" property="location" />
+    <result column="brief_introduction" jdbcType="VARCHAR" property="briefIntroduction" />
+    <result column="language" jdbcType="INTEGER" property="language" />
+    <result column="main_img" jdbcType="VARCHAR" property="mainImg" />
+    <result column="trans_id" jdbcType="BIGINT" property="transId" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, title, start_time, city, "location", brief_introduction, "language", main_img, 
+    trans_id, created_at, updated_at, del_flag
+  </sql>
+  <select id="queryEventTrans" resultType="com.ic.icadmin.dto.response.events.EventTransResponse">
+    select id as id, title as title from events
+    where del_flag = false
+    order by id desc
+  </select>
+</mapper>

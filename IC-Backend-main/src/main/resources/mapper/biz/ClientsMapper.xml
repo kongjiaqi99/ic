@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ic.icadmin.mapper.ClientsMapper">
+  <resultMap id="BaseResultMap" type="com.ic.icadmin.entity.ClientsEntity">
+    <!--@mbg.generated-->
+    <!--@Table clients-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="encrypted_password" jdbcType="VARCHAR" property="encryptedPassword" />
+    <result column="reset_password_token" jdbcType="VARCHAR" property="resetPasswordToken" />
+    <result column="reset_password_sent_at" jdbcType="TIMESTAMP" property="resetPasswordSentAt" />
+    <result column="sign_in_count" jdbcType="INTEGER" property="signInCount" />
+    <result column="current_sign_in_at" jdbcType="TIMESTAMP" property="currentSignInAt" />
+    <result column="last_sign_in_at" jdbcType="TIMESTAMP" property="lastSignInAt" />
+    <result column="current_sign_in_ip" jdbcType="VARCHAR" property="currentSignInIp" />
+    <result column="last_sign_in_ip" jdbcType="VARCHAR" property="lastSignInIp" />
+    <result column="upper_client_id" jdbcType="INTEGER" property="upperClientId" />
+    <result column="beaver_id" jdbcType="VARCHAR" property="beaverId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="client_type" jdbcType="INTEGER" property="clientType" />
+    <result column="country_code" jdbcType="VARCHAR" property="countryCode" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="salt" jdbcType="VARCHAR" property="salt" />
+    <result column="birth" jdbcType="DATE" property="birth" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="bsb" jdbcType="VARCHAR" property="bsb" />
+    <result column="account_name" jdbcType="VARCHAR" property="accountName" />
+    <result column="account_number" jdbcType="VARCHAR" property="accountNumber" />
+    <result column="start_date" jdbcType="DATE" property="startDate" />
+    <result column="end_date" jdbcType="DATE" property="endDate" />
+    <result column="interested_fund" jdbcType="VARCHAR" property="interestedFund" />
+    <result column="invest_entity" jdbcType="INTEGER" property="investEntity" />
+    <result column="invest_status" jdbcType="INTEGER" property="investStatus" />
+    <result column="link_to_valueup" jdbcType="BOOLEAN" property="linkToValueup" />
+    <result column="target_amount" jdbcType="NUMERIC" property="targetAmount" />
+    <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
+    <result column="withheld_tax" jdbcType="BOOLEAN" property="withheldTax" />
+    <result column="tf_num" jdbcType="VARCHAR" property="tfNum" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, email, encrypted_password, reset_password_token, reset_password_sent_at, sign_in_count, 
+    current_sign_in_at, last_sign_in_at, current_sign_in_ip, last_sign_in_ip, upper_client_id, 
+    beaver_id, "name", client_type, country_code, mobile, salt, birth, created_at, updated_at, 
+    bsb, account_name, account_number, start_date, end_date, interested_fund, invest_entity, invest_status,
+    link_to_valueup, target_amount, del_flag, withheld_tax, tf_num
+  </sql>
+
+  <sql id="Join_Base_Column_List">
+    <!--@mbg.generated-->
+    c.id, c.email, c.encrypted_password, c.reset_password_token, c.reset_password_sent_at, c.sign_in_count,
+    c.current_sign_in_at, c.last_sign_in_at, c.current_sign_in_ip, c.last_sign_in_ip, c.upper_client_id,
+    c.beaver_id, c."name", c.client_type, c.country_code, c.mobile, c.salt, c.birth, c.created_at, c.updated_at,
+    c.bsb, c.account_name, c.account_number, c.start_date, c.end_date, c.interested_fund, c.invest_entity, c.invest_status,
+    c.link_to_valueup, c.target_amount, c.del_flag, c.withheld_tax, c.tf_num
+  </sql>
+  <!--c.birth + 1 for getting whose birthday is today      -->
+  <select id="queryBirthdayComingOneMonth" resultMap="BaseResultMap">
+    select c.id , c.name, c.birth, c.email from clients c
+    where c.birth + date_trunc('year', age(c.birth + 1)) + interval '1 year' between current_date and (current_date + interval '1 month')
+      and c.del_flag = false
+    order by extract(MONTH FROM c.birth), extract(DAY FROM c.birth)
+  </select>
+
+  <select id="queryClientDetailById" parameterType="java.lang.Long"
+          resultType="com.ic.icadmin.dto.biz.BizClientDetailDTO">
+    select c.id, c.beaver_id, c.name, c.email, c.country_code, c.mobile, c.birth, c.client_type, c.upper_client_id,
+    c.level_two_upper_client_id,
+           c.bsb, c.account_name, c.account_number, c.created_at, c.start_date, c.end_date, c.target_amount, c.link_to_valueup,
+           (case when c.upper_client_id is not null then (select cl.name from clients cl where cl.id = c.upper_client_id)
+                 else null end) as upperClientName,
+    (case when c.level_two_upper_client_id is not null then (select cl.name from clients cl where cl.id = c.level_two_upper_client_id)
+    else null end) as level2UpperClientName, c.withheld_tax, c.tf_num
+    from clients c where c.id = #{id,jdbcType=BIGINT}
+    and c.del_flag = false
+  </select>
+
+  <select id="queryUpperClients" resultType="com.ic.icadmin.dto.response.client.UpperClientsResponse">
+    select id, name from clients where del_flag = false order by id desc
+  </select>
+
+  <select id="getClientsNames" resultType="com.ic.icadmin.dto.response.financings.ClientsNameResponse">
+    select id as id, name as name from clients
+    where del_flag = false
+    order by id desc
+  </select>
+  <select id="queryClientList" resultMap="BaseResultMap">
+      select distinct(c.id),
+        <include refid="Join_Base_Column_List"/>
+      from clients c
+        left join investment_entities ie on c.id  = ie.client_id
+      <where>
+        and c.del_flag = false
+        <if test="name != null and name != ''">
+          and c.name ilike '%'||trim(#{name})||'%'
+        </if>
+        <if test="mobile != null and mobile != ''">
+          and c.mobile ilike '%'||trim(#{mobile})||'%'
+        </if>
+        <if test="email != null and email != ''">
+          and c.email ilike '%'||trim(#{email})||'%'
+        </if>
+        <if test="beaverId != null and beaverId != ''">
+          and c.beaver_id ilike '%'||trim(#{beaverId})||'%'
+        </if>
+        <if test="clientType != null and clientType != ''">
+          and c.client_type = #{clientType}
+        </if>
+        <if test="id != null and id != ''">
+          and c.id = #{id}
+        </if>
+        <if test="entityName != null and entityName != ''">
+          and ie.entity_name ilike '%'||trim(#{entityName})||'%'
+        </if>
+        <if test="state != null and state != ''">
+          and ie.state ilike '%'||trim(#{state})||'%'
+        </if>
+        <if test="withheldTax != null and withheldTax != ''">
+          and c.withheld_tax = #{withheldTax}
+        </if>
+      </where>
+      order by c.id desc
+  </select>
+</mapper>

@@ -1,0 +1,29 @@
+# 应用名称
+spring:
+  application:
+    name: ic-admin
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://8.219.111.81:8848
+        # 注册到 nacos 的指定 namespace，默认为 public
+        namespace: 7547c85f-76ab-4484-b2ba-c880934bfb83
+        group: DEFAULT_GROUP
+      config:
+        # Nacos 服务发现与注册配置，其中子属性 server-addr 指定 Nacos 服务器主机和端口
+        server-addr: http://8.219.111.81:8848
+        # 指定配置的 Data ID 后缀，支持 properties、yaml、yml，默认为 properties
+        file-extension: yaml
+        namespace: 7547c85f-76ab-4484-b2ba-c880934bfb83
+        group: DEFAULT_GROUP
+        enabled: true
+        #静态配置文件
+        extension-configs[0]:
+          data-id: new-ic-admin-static-prod.yaml
+          group: DEFAULT_GROUP
+          refresh: false
+        #动态配置文件
+        extension-configs[1]:
+          data-id: new-ic-admin-dynamic-prod.yaml
+          group: DEFAULT_GROUP
+          refresh: true

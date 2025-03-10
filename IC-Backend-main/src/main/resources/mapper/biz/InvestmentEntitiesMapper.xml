@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ic.icadmin.mapper.InvestmentEntitiesMapper">
+  <resultMap id="BaseResultMap" type="com.ic.icadmin.entity.InvestmentEntities">
+    <!--@mbg.generated-->
+    <!--@Table investment_entities-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="client_id" jdbcType="BIGINT" property="clientId" />
+    <result column="entity_type" jdbcType="INTEGER" property="entityType" />
+    <result column="kyc_result" jdbcType="BOOLEAN" property="kycResult" />
+    <result column="entity_name" jdbcType="VARCHAR" property="entityName" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="bsb" jdbcType="VARCHAR" property="bsb" />
+    <result column="account_number" jdbcType="VARCHAR" property="accountNumber" />
+    <result column="account_name" jdbcType="VARCHAR" property="accountName" />
+    <result column="file_1_front" jdbcType="VARCHAR" property="file1Front" />
+    <result column="file_1_back" jdbcType="VARCHAR" property="file1Back" />
+    <result column="file_2_front" jdbcType="VARCHAR" property="file2Front" />
+    <result column="file_2_back" jdbcType="VARCHAR" property="file2Back" />
+    <result column="detail_info" jdbcType="OTHER" property="detailInfo" />
+    <result column="kyc_status" jdbcType="INTEGER" property="kycStatus" />
+    <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
+    <result column="transcation_id" jdbcType="VARCHAR" property="transcationId" />
+    <result column="tf_num" jdbcType="VARCHAR" property="tfNum" />
+    <result column="withheld_tax" jdbcType="BOOLEAN" property="withheldTax" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, client_id, entity_type, kyc_result, entity_name, created_at, updated_at, bsb, 
+    account_number, account_name, file_1_front, file_1_back, file_2_front, file_2_back, 
+    detail_info, kyc_status, del_flag, transcation_id, tf_num, withheld_tax
+  </sql>
+</mapper>
